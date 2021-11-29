@@ -1,12 +1,16 @@
 package web.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import web.model.User;
 
-@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findUserByLogin(String login);
 
-    User findUserById(Long id);
+    @Query(name = "Username.findWithRoles", value = "from User u JOIN FETCH u.roles where u.username = :username")
+    User findByUsername(@Param("username") String username);
+
+    @Query(name = "Email.findWithRoles", value = "from User u JOIN FETCH u.roles where u.email = :email")
+    User findByEmail(@Param("email") String email);
+
 }
