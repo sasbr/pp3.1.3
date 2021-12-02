@@ -28,4 +28,9 @@ public class RoleServiceImp implements RoleService{
     public Set<Role> getRolesByName(String[] roles) {
         return new HashSet<Role>(roleRep.findRolesByRolenamesArray(roles));
     }
+    @Override
+    public void addNewRole(Role role) {
+         roleRep.save(role);
+    }
+
 }

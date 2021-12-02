@@ -6,9 +6,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import web.config.handler.LoginSuccessHandler;
 import web.service.UserService;
@@ -26,12 +28,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         if (us.listUsers().isEmpty()) {
             //Если база пользователей пуста - используем по умолчанию: [ADMIN:123]
-            auth.inMemoryAuthentication().withUser("ADMIN").password("$2y$10$Oedz6pMQNyI9iLjaPn15E.SHIIplJNxNZ7PMcsspjUf5xqv2Jes7O").roles("ADMIN");
+            auth.inMemoryAuthentication().withUser("ADMIN").password("$2y$10$Oedz6pMQNyI9iLjaPn15E.SHIIplJNxNZ7PMcsspjUf5xqv2Jes7O").authorities("ROLE_ADMIN", "ROLE_USER");
         } else {
             //При наличии в базе пользователей - аутентификация по содержимому БД
             auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
         }
     }
+
+  /*  @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService());
+    }
+
+    @Bean
+    @Override
+    public UserDetailsService userDetailsService() {
+        InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
+        inMemoryUserDetailsManager.createUser(User.withUsername("ADMIN").password("$2y$10$Oedz6pMQNyI9iLjaPn15E.SHIIplJNxNZ7PMcsspjUf5xqv2Jes7O").authorities("ROLE_ADMIN", "ROLE_USER").build());
+        //more as above
+        return inMemoryUserDetailsManager;
+    }
+   */
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
