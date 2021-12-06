@@ -1,5 +1,5 @@
 package web.controller;
-
+/*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -11,12 +11,12 @@ import web.service.UserService;
 
 @Controller
 @RequestMapping("")
-public class AdminController {
+public class AdminController1 {
     private final UserService us;
     private final RoleService rs;
 
     @Autowired
-    public AdminController(UserService us, RoleService rs) {
+    public AdminController1(UserService us, RoleService rs) {
         this.us = us;
         this.rs = rs;
     }
@@ -74,3 +74,5 @@ public class AdminController {
         return "redirect:/admin/admin";
     }
 }
+
+ */

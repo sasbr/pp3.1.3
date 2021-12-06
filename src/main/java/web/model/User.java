@@ -1,5 +1,6 @@
 package web.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -86,12 +87,23 @@ public class User implements UserDetails {
    }
 
    @Override
+   @JsonIgnore
    public Collection<? extends GrantedAuthority> getAuthorities() {
       return roles;
    }
    public Set<Role> getRoles() {
       return roles;
    }
+   public String[] getRolesStrArr() {
+      String[] ret = new String[roles.size()];
+      int i = 0;
+      for(Role r: roles){
+         ret[i] = r.getRoleName();
+         i++;
+      }
+      return ret;
+   }
+
    public void setRoles(Set<Role> roles) {
       this.roles = roles;
    }

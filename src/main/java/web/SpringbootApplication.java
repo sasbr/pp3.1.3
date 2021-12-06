@@ -19,24 +19,18 @@ public class SpringbootApplication {
         SpringApplication.run(SpringbootApplication.class, args);
     }
 
-
-    @Bean
-    CommandLineRunner commandLineRunner(UserServiceImp userService, RoleServiceImp roleService) {
-        return args -> {
-            System.out.println("In CommandLineRunnerImpl ");
-
-
+  //  @Bean
+   // CommandLineRunner commandLineRunner(UserServiceImp userService, RoleServiceImp roleService) {
+     //   return args -> {
+       //     System.out.println("In CommandLineRunnerImpl ");
 /*
            roleService.addNewRole(new Role(null, "ROLE_USER"));
             roleService.addNewRole(new Role(null, "ROLE_ADMIN"));
 
             userService.create(new User ("ADMIN", "ADMIN", "Admin@mail.ru","111", new HashSet<>()));
             userService.create(new User ("USER", "USER", "User@mail.ru","112", new HashSet<>()));
-
 */
-
 /*
-
             Role user = new Role("ROLE_USER");
             roleService.addNewRole(user);
             Role admin = new Role("ROLE_ADMIN");
@@ -53,16 +47,7 @@ public class SpringbootApplication {
             user2.setRoles(roleAdmin);
 
             userService.create(user1);
-            userService.create(user2);
-
- */
-
-
-        };
-
-
-
-    }
-
-
+            userService.create(user2); */
+      //  };
+  //  }
 }

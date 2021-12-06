@@ -20,13 +20,11 @@ public class UserServiceImp implements UserService {
       this.userRep = userRep;
       this.passEncoder = passwordEncoder;
    }
-
    @Override
    public void create(User user) {
       user.setPassword(passEncoder.encode(user.getPassword()));
       userRep.save(user);
    }
-
    @Override
    public void update(User user) {
       if(user.getPassword().length() != 0){
@@ -57,12 +55,10 @@ public class UserServiceImp implements UserService {
    public List<User> listUsers() {
       return userRep.findAll();
    }
-
    @Override
     public User findByUsername(String username) {
       return userRep.findByUsername(username);
    }
-
    @Override
    public User findByEmail(String email) {
       return userRep.findByEmail(email);

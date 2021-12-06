@@ -2,6 +2,7 @@ package web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import web.model.Role;
 import web.repository.RoleRepository;
 
@@ -20,11 +21,13 @@ public class RoleServiceImp implements RoleService{
     }
 
     @Override
+    @Transactional(readOnly=true)
     public List<Role> getRoles() {
         return roleRep.findAll();
     }
 
     @Override
+    @Transactional(readOnly=true)
     public Set<Role> getRolesByName(String[] roles) {
         return new HashSet<Role>(roleRep.findRolesByRolenamesArray(roles));
     }
@@ -34,3 +37,4 @@ public class RoleServiceImp implements RoleService{
     }
 
 }
+
